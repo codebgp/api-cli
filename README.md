@@ -13,7 +13,7 @@ declare -x CODEBGP_AUTH_CLIENT_ID=`auth-client-id` \
     CODEBGP_AUTH_DOMAIN=login.codebgp.com
 ```
 
-2. `--username`, `--password` and `tenant-id` are required for the initial authentication (#1). `--jwt_audience` is implicitly propagated to tokens on refresh and it receives a default value when omitted.
+2. `--username`, `--password` and `--tenant` are required for the initial authentication (#1). `--jwt_audience` is implicitly propagated to tokens on refresh and it receives a default value when omitted.
 
 3. `CODEBGP_ACCESS_TOKEN`  `CODEBGP_REFRESH_TOKEN` are state variables, updated by authentication commands and used to keep the state of the currently used tokens. `CODEBGP_ENDPOINT` is extracted from the `CODEBGP_ACCESS_TOKEN` payload custom claim to dynamically set the API endpoint from the access token.
 
@@ -24,7 +24,7 @@ The commands below depend on `jq` for JSON processing, but any similar tool can 
 
 1. Fetch the `CODEBGP_ACCESS_TOKEN` and `CODEBGP_REFRESH_TOKEN`:
 ```
-temp=$(./get-token.sh --username=`username` --password=`password` --tenant=`tenant-id`) \
+temp=$(./get-token.sh --username=`username` --password=`password` --tenant=`tenant`) \
     && CODEBGP_ACCESS_TOKEN=$(echo $temp | jq -r .access_token) \
     && CODEBGP_REFRESH_TOKEN=$(echo $temp | jq -r .refresh_token)
 ```

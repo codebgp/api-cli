@@ -9,7 +9,7 @@ The scripts in this directory perform HTTP requests to CodeBGP Authentication se
 because they identify the client account and are pre-configured on the Authentication service. They can be defined as
 environment variables:
 ```
-declare -x CODEBGP_AUTH_CLIENT_ID=auth-client-id \
+declare -x CODEBGP_AUTH_CLIENT_ID='<auth-client-id>' \
     CODEBGP_AUTH_DOMAIN=login.codebgp.com
 ```
 

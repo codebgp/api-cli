@@ -9,7 +9,7 @@ The scripts in this directory perform HTTP requests to CodeBGP Authentication se
 because they identify the client account and are pre-configured on the Authentication service. They can be defined as
 environment variables:
 ```
-declare -x CODEBGP_AUTH_CLIENT_ID=`auth-client-id` \
+declare -x CODEBGP_AUTH_CLIENT_ID=auth-client-id \
     CODEBGP_AUTH_DOMAIN=login.codebgp.com
 ```
 
@@ -24,7 +24,7 @@ The commands below depend on `jq` for JSON processing, but any similar tool can 
 
 1. Fetch the `CODEBGP_ACCESS_TOKEN` and `CODEBGP_REFRESH_TOKEN`:
 ```
-temp=$(./get-token.sh --username=`username` --password=`password` --tenant=`tenant`) \
+temp=$(./get-token.sh --username='<username>' --password='<password>' --tenant='<tenant>') \
     && CODEBGP_ACCESS_TOKEN=$(echo $temp | jq -r .access_token) \
     && CODEBGP_REFRESH_TOKEN=$(echo $temp | jq -r .refresh_token)
 ```

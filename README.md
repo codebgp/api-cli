@@ -24,7 +24,7 @@ The commands below depend on `jq` for JSON processing, but any similar tool can 
 
 1. Fetch the `CODEBGP_ACCESS_TOKEN` and `CODEBGP_REFRESH_TOKEN`:
 ```
-temp=$(./scripts/cli/get-token.sh --username=`username` --password=`password`) \
+temp=$(./get-token.sh --username=`username` --password=`password`) \
     && CODEBGP_ACCESS_TOKEN=$(echo $temp | jq -r .access_token) \
     && CODEBGP_REFRESH_TOKEN=$(echo $temp | jq -r .refresh_token)
 ```
@@ -38,19 +38,19 @@ CODEBGP_ENDPOINT=$(CODEBGP_ACCESS_TOKEN=$CODEBGP_ACCESS_TOKEN ./get-endpoint.sh)
 ```
 CODEBGP_ACCESS_TOKEN=$CODEBGP_ACCESS_TOKEN \
      CODEBGP_ENDPOINT=$CODEBGP_ENDPOINT \
-    ./scripts/cli/query.sh ./scripts/cli/sample_query.json | jq .
+    ./query.sh ./sample_query.json | jq .
 ```
 
 4. Use the `CODEBGP_ACCESS_TOKEN` and `CODEBGP_ENDPOINT` to perform GraphQL queries from query string:
 ```
 CODEBGP_ACCESS_TOKEN=$CODEBGP_ACCESS_TOKEN \
     CODEBGP_ENDPOINT=$CODEBGP_ENDPOINT \
-    ./scripts/cli/query.sh "{\"query\": \"query { prefixes { network } }\"}" | jq .
+    ./query.sh "{\"query\": \"query { prefixes { network } }\"}" | jq .
 ```
 
 5. Refresh the `CODEBGP_ACCESS_TOKEN` using the `CODEBGP_REFRESH_TOKEN`:
 ```
-temp=$(./scripts/cli/refresh-token.sh $CODEBGP_REFRESH_TOKEN) \
+temp=$(./refresh-token.sh $CODEBGP_REFRESH_TOKEN) \
     && CODEBGP_ACCESS_TOKEN=$(echo $temp | jq -r .access_token)
 ```
 
@@ -61,7 +61,7 @@ CODEBGP_REFRESH_TOKEN=$(echo $temp | jq -r .refresh_token)
 
 7. Revoke the `CODEBGP_REFRESH_TOKEN`:
 ```
-./scripts/cli/revoke-token.sh $CODEBGP_REFRESH_TOKEN
+./revoke-token.sh $CODEBGP_REFRESH_TOKEN
 ```
 
 ## Flow
